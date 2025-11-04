@@ -46,7 +46,6 @@
 		"build": "next build",
 		"dev": "next dev",
 		"lint": "eslint",
-		"postinstall": "prisma generate",
 		"push": "prisma db push",
 		"start": "next start",
 		"studio": "prisma studio"
