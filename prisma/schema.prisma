@@ -1,4 +1,3 @@
-
 generator zod {
   provider                         = "zod-prisma-types"
   output                           = "../generated/zod"
@@ -31,8 +30,9 @@ generator zod {
 }
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider      = "prisma-client"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "rhel-openssl-1.1.x", "rhel-openssl-3.0.x"] //It tells Prisma to get the engine for the new Vercel/AWS Lambda runtime.
 }
 
 datasource db {
