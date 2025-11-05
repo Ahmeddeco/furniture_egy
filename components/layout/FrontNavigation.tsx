@@ -3,6 +3,7 @@
 import { frontNavLinks } from "@/constants/nav"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Button } from "../ui/button"
 
 export default function FrontNavigation() {
 	const pathName = usePathname()
@@ -10,13 +11,23 @@ export default function FrontNavigation() {
 	return (
 		<>
 			{frontNavLinks.map((link) => (
-				<Link
+				<Button
+					asChild
 					key={link.title}
-					href={link.href}
-					className={`${pathName === link.href ? "underline-offset-8 underline font-extrabold" : "font-medium"}  capitalize`}
+					variant={"ghost"}
+					className="w-full lg:w-fit"
 				>
-					{link.title}
-				</Link>
+					<Link
+						href={link.href}
+						className={`${
+							pathName === link.href
+								? "underline-offset-8 underline font-extrabold"
+								: "font-medium"
+						}  capitalize`}
+					>
+						{link.title}
+					</Link>
+				</Button>
 			))}
 		</>
 	)

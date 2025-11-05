@@ -1,6 +1,6 @@
 generator zod {
   provider                         = "zod-prisma-types"
-  output                           = "../generated/zod"
+  output                           = "../generated"
   useMultipleFiles                 = true
   writeNullishInModelTypes         = true
   createModelTypes                 = true
@@ -30,9 +30,8 @@ generator zod {
 }
 
 generator client {
- provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "rhel-openssl-3.0.x"] //It tells Prisma to get the engine for the new Vercel/AWS Lambda runtime.
-  // output        = "../generated/prisma"
 }
 
 datasource db {
@@ -47,68 +46,148 @@ enum Role {
 }
 
 model User {
-  id            String    @id @default(uuid())
-  name          String
-  email         String
-  emailVerified Boolean   @default(false)
+  id            String          @id @default(cuid())
+  name          String?
+  email         String?         @unique
+  emailVerified DateTime?
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now()) @updatedAt
-  role          Role      @default(user)
-  sessions      Session[]
+  mobile        String?
+  country       String?
+  state         String?
+  city          String?
   accounts      Account[]
-
-  banned     Boolean?  @default(false)
-  banReason  String?
-  banExpires DateTime?
-
-  @@unique([email])
-  @@map("user")
-}
-
-model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  impersonatedBy String?
-
-  @@unique([token])
-  @@map("session")
+  sessions      Session[]
+  Authenticator Authenticator[]
+  role          Role            @default(user)
+  Review        Review[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  Product       Product?        @relation(fields: [productId], references: [id])
+  productId     String?
 }
 
 model Account {
-  id                    String    @id
-  accountId             String
-  providerId            String
-  userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
-  @@map("account")
+  @@id([provider, providerAccountId])
 }
 
-model Verification {
-  id         String   @id
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique // <--- THIS IS THE CRITICAL LINE
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
 
-  @@map("verification")
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
+
+model Model {
+  id        String    @id @default(uuid())
+  title     String
+  factory   Factory   @relation(fields: [factoryId], references: [id])
+  factoryId String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  product   Product[]
+  productId String
+}
+
+model Factory {
+  id        String    @id @default(uuid())
+  name      String
+  phone     String?
+  country   String?
+  state     String?
+  city      String?
+  logo      String?
+  email     String    @unique
+  model     Model[]
+  product   Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  title       String
+  price       Int      @default(0)
+  quantity    Int      @default(0)
+  size        Size     @default(lg)
+  mainImage   String
+  images      String[]
+  description String
+  category    Category @default(modern)
+  color       Color[]
+  review      Review[]
+  factory     Factory  @relation(fields: [factoryId], references: [id])
+  model       Model    @relation(fields: [modelId], references: [id])
+  factoryId   String
+  modelId     String
+  seller      User[]
+
+  @@index([title, category, id])
+}
+
+enum Size {
+  lg
+  xl
+  xs
+}
+
+enum Category {
+  modern
+  classic
+  industerial
+}
+
+model Color {
+  id      String    @id @default(uuid())
+  title   String    @unique
+  product Product[]
+}
+
+model Review {
+  id        String  @id @default(uuid())
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  review    String
+  userId    String
+  productId String
 }
