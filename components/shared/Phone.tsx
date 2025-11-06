@@ -14,7 +14,7 @@ type Props = {
 }
 
 export default function Phone({ defaultValue, key, name, errors }: Props) {
-	const [value, setValue] = useState<string | undefined>("")
+	const [value, setValue] = useState<string | undefined>(defaultValue??"")
 
 	return (
 		<>
@@ -24,14 +24,13 @@ export default function Phone({ defaultValue, key, name, errors }: Props) {
 					type="hidden"
 					key={key}
 					name={name}
-					defaultValue={defaultValue}
 					value={value}
 				/>
 				<PhoneInput
 					placeholder="Enter phone number"
 					value={value}
 					onChange={setValue}
-					defaultCountry="EG"
+					defaultCountry="EG" 
 				/>
 				<FieldError>{errors}</FieldError>
 			</Field>

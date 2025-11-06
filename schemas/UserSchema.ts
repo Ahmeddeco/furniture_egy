@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 export const UserSchema = z.object({
   role: RoleSchema,
+  id: z.string().nullish(),
   name: z.string(),
   email: z.string(),
   mobile: z.string().min(8),

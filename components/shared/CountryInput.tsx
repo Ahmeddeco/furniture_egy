@@ -1,11 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import {
-	CitySelect,
-	CountrySelect,
-	StateSelect,
-} from "react-country-state-city"
+import { CitySelect, CountrySelect, StateSelect } from "react-country-state-city"
 import "react-country-state-city/dist/react-country-state-city.css"
 import { Input } from "../ui/input"
 import { City, Country, State } from "@/types/address"
@@ -21,17 +17,17 @@ type CountryProps = {
 }
 
 export default function CountryInput({
-	userCity = "",
-	userState = "",
-	userCountry = "",
+	userCity,
+	userState,
+	userCountry,
 	labelCity = "City",
 	labelCountry = "Country",
 	labelState = "State",
 }: CountryProps) {
 	/* -------------------------------- useState -------------------------------- */
-	const [country, setCountry] = useState<Country>(userCountry)
-	const [state, setState] = useState<State>(userState)
-	const [city, setCity] = useState<City>(userCity)
+	const [country, setCountry] = useState<Country>(userCountry ?? "")
+	const [state, setState] = useState<State>(userState ?? "")
+	const [city, setCity] = useState<City>(userCity ?? "")
 
 	return (
 		<>

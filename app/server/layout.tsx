@@ -9,9 +9,9 @@ export default function ServerLayout({
 	return (
 		<SidebarProvider>
 			<ServerSidebar />
-			<div className="w-full p-4">
+			<div className="w-full p-4 ">
 				<SidebarTrigger />
-				<div className=" py-4 lg:py-8  ">{children}</div>
+				<div className=" p-4">{children}</div>
 			</div>
 		</SidebarProvider>
 	)
