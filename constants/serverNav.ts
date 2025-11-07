@@ -1,4 +1,4 @@
-import { Armchair, Palette, Server, User2 } from "lucide-react"
+import { Armchair, Factory, Palette, Server, User2 } from "lucide-react"
 
 export const serverNav = [
   {
@@ -15,6 +15,11 @@ export const serverNav = [
     title: "Product",
     href: "/server/product",
     icon: Armchair
+  },
+  {
+    title: "factory",
+    href: "/server/factory",
+    icon: Factory
   },
   {
     title: "Color",

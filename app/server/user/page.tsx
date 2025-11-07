@@ -89,7 +89,7 @@ export default async function UsersPage({ searchParams }: { searchParams: Promis
 										</DropdownMenuTrigger>
 										<DropdownMenuContent align="end" className="space-y-2">
 											<DropdownMenuItem asChild>
-												<Button variant={"default"} size={"full"}>
+												<Button variant={"default"} size={"full"} asChild>
 													<Link href={`/server/user/edit/${id}`}>edit</Link>
 												</Button>
 											</DropdownMenuItem>

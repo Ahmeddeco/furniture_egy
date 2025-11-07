@@ -5,7 +5,7 @@ import { z } from 'zod';
 /////////////////////////////////////////
 
 export const ColorSchema = z.object({
-  id: z.string(),
+  id: z.string().nullish(),
   title: z.string(),
 })
 

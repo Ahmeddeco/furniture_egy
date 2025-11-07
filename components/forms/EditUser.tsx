@@ -34,14 +34,9 @@ export default function EditUser(data: data) {
 	})
 
 	return (
-		<Form
-			id={form.id}
-			action={action}
-			onSubmit={form.onSubmit}
-			// noValidate
-			className="space-y-6"
-		>
+		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
 			<Input type="hidden" name="id" value={data.data.id} />
+
 			{/* ---------------------------------- name ---------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.name.name}>{fields.name.name}</FieldLabel>

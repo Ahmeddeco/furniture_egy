@@ -132,12 +132,12 @@ model Model {
 model Factory {
   id        String    @id @default(uuid())
   name      String
-  phone     String?
+  email     String    @unique
+  phone     String?   @unique
   country   String?
   state     String?
   city      String?
   logo      String?
-  email     String    @unique
   model     Model[]
   product   Product[]
   createdAt DateTime  @default(now())
