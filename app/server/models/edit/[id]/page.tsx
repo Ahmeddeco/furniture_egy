@@ -6,17 +6,17 @@ import {
 	AllStylesForModel,
 	getAllFactoriesForModel,
 	getAllStylesForModel,
-	getOneModel,OneModel
-} from "@/dl/model"
+	getOneModel,
+	OneModel,
+} from "@/dl/modelData"
 import EditModel from "@/components/forms/EditModel"
 
 export default async function EditUserPage({ params }: { params: Promise<{ id: string }> }) {
 	const id = (await params).id
-	const model:OneModel = await getOneModel(id)
-	
+	const model: OneModel = await getOneModel(id)
+
 	const factories: AllFactoriesForModel = await getAllFactoriesForModel()
 	const styles: AllStylesForModel = await getAllStylesForModel()
-	
 
 	return (
 		<ServerPageCard

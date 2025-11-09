@@ -9,7 +9,6 @@ export const getAllFactory = async (size: number, page: number) => {
       skip: (page * size) - size,
       take: size,
       orderBy: {
-        // createdAt: "desc",
         name: "asc",
       },
     })
@@ -28,6 +27,15 @@ export const getOneFactory = async (id: string) => {
       }
     })
     return { data }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getAllFactoryForDropdown = async () => {
+  try {
+    const data = await prisma.factory.findMany({ orderBy: { name: "asc" }, select: { id: true, name: true } })
+    return data
   } catch (error) {
     console.error(error)
   }

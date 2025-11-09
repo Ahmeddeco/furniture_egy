@@ -24,7 +24,14 @@ type Props = {
 
 /* ------------------------ UploadManyImagesDropZone ------------------------ */
 export function UploadManyImagesDropZone({ dbImages, label = "images", imagesName = "images", errors }: Props) {
-	const [images, setImages] = useState<string[]>(dbImages || [])
+	const splittedImages = (images: string) => {
+		const imagesArray = images.split(",").map((image) => image.trim())
+		return imagesArray
+	}
+	const dbSplittedImages = dbImages ? splittedImages(dbImages?.toString()) : []
+
+	const [images, setImages] = useState<string[]>(dbSplittedImages)
+
 	const handleDeleteManyImages = (index: number) => {
 		setImages(images.filter((_, i) => i !== index))
 	}

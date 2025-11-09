@@ -12,7 +12,7 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { getAllUsers } from "@/dl/user"
+import { getAllUsers } from "@/dl/userData"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -105,8 +105,8 @@ export default async function UsersPage({ searchParams }: { searchParams: Promis
 														<DialogHeader>
 															<DialogTitle>Are you sure you want to delete this user ?</DialogTitle>
 															<DialogDescription>
-																This action cannot be undone. This will permanently delete this user and remove his data
-																from our servers.
+																This action can not be undone. This will permanently delete this user and remove its
+																data from our servers.
 															</DialogDescription>
 														</DialogHeader>
 														<div className="flex items-center justify-between ">

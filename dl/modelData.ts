@@ -80,7 +80,7 @@ export const getAllModels = async (size: number, page: number) => {
   }
 }
 
-
+/* ------------------------------- getOneModel ------------------------------ */
 export const getOneModel = async (id: string) => {
   try {
     const data = await prisma.model.findUnique({
@@ -102,6 +102,16 @@ export const getOneModel = async (id: string) => {
       }
     })
     return { data }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+/* ------------------------- getAllModelsForDropdown ------------------------ */
+export const getAllModelsForDropdown = async () => {
+  try {
+    const data = await prisma.model.findMany({ orderBy: { title: "asc" }, select: { id: true, title: true } })
+    return data
   } catch (error) {
     console.error(error)
   }

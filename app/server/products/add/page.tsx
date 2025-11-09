@@ -1,17 +1,24 @@
-import { CircleArrowLeft, CircleChevronLeft, Factory } from "lucide-react"
+import { CircleChevronLeft } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
-import AddFactory from "@/components/forms/AddFactory"
+import AddProduct from "@/components/forms/AddProduct"
+import { getAllFactoryForDropdown } from "@/dl/factoryData"
+import { getAllSellersForDropdown } from "@/dl/userData"
+import { getAllModelsForDropdown } from "@/dl/modelData"
 
-export default function AddFactoryPage() {
+export default async function AddFactoryPage() {
+	const factories = await getAllFactoryForDropdown()
+	const users = await getAllSellersForDropdown()
+	const models = await getAllModelsForDropdown()
+
 	return (
 		<ServerPageCard
 			icon={CircleChevronLeft}
-			title={"Add factory"}
-			description={"Add a factory to the database."}
+			title={"Add product"}
+			description={"Add a product to the database."}
 			btnTitle={"back"}
-			href="/server/factory"
+			href="/server/products"
 		>
-			<AddFactory />
+			<AddProduct factories={factories} users={users} models={models} />
 		</ServerPageCard>
 	)
 }

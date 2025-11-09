@@ -1,10 +1,10 @@
 import { CircleChevronLeft, Factory } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
-import { getOneFactory } from "@/dl/factory"
+import { getOneFactory } from "@/dl/factoryData"
 import EditFactory from "@/components/forms/EditFactory"
 import EditStyle from "@/components/forms/EditStyle"
-import { getOneStyle } from "@/dl/style"
+import { getOneStyle } from "@/dl/styleData"
 
 export default async function EditUserPage({ params }: { params: Promise<{ id: string }> }) {
 	const id = (await params).id

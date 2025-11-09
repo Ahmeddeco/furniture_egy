@@ -160,7 +160,7 @@ model Style {
 
 model Product {
   id          String      @id @default(uuid())
-  title       String
+  title       String      @unique
   price       Float       @default(0)
   discount    Float       @default(0)
   quantity    Int         @default(0)

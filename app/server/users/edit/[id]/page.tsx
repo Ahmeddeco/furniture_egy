@@ -1,7 +1,7 @@
 import { CircleChevronLeft, UserRoundX } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EditUser from "@/components/forms/EditUser"
-import { getOneUser } from "@/dl/user"
+import { getOneUser } from "@/dl/userData"
 import EmptyCard from "@/components/shared/EmptyCard"
 
 export default async function EditUserPage({ params }: { params: Promise<{ id: string }> }) {

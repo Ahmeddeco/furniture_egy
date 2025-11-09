@@ -10,7 +10,7 @@ import { Input } from "../ui/input"
 import SubmitButton from "../shared/SubmitButton"
 import { editModelAction } from "@/actions/modelAction"
 import ModelSchema from "@/schemas/ModelSchema"
-import { AllFactoriesForModel, AllStylesForModel, OneModel } from "@/dl/model"
+import { AllFactoriesForModel, AllStylesForModel, OneModel } from "@/dl/modelData"
 
 type Props = {
 	data: OneModel

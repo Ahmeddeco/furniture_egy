@@ -10,7 +10,7 @@ import SubmitButton from "../shared/SubmitButton"
 import { addModelAction } from "@/actions/modelAction"
 import ModelSchema from "@/schemas/ModelSchema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { AllFactoriesForModel, AllStylesForModel } from "@/dl/model"
+import { AllFactoriesForModel, AllStylesForModel } from "@/dl/modelData"
 
 type Props = {
 	factories: AllFactoriesForModel

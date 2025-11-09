@@ -26,9 +26,9 @@ import {
 } from "@/components/ui/dialog"
 import Form from "next/form"
 import { Input } from "@/components/ui/input"
-import { getAllFactory } from "@/dl/factory"
+import { getAllFactory } from "@/dl/factoryData"
 import { deleteFactoryAction } from "@/actions/factoryAction"
-import { getAllModels } from "@/dl/model"
+import { getAllModels } from "@/dl/modelData"
 import { deleteModelAction } from "@/actions/modelAction"
 
 export default async function FactoryPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
@@ -96,7 +96,7 @@ export default async function FactoryPage({ searchParams }: { searchParams: Prom
 														<DialogHeader>
 															<DialogTitle>Are you sure you want to delete this model ?</DialogTitle>
 															<DialogDescription>
-																This action cannot be undone. This will permanently delete this model and remove its
+																This action can not be undone. This will permanently delete this model and remove its
 																data from our servers.
 															</DialogDescription>
 														</DialogHeader>
