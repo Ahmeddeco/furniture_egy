@@ -9,7 +9,6 @@ import Image from "next/image"
 import { Button } from "../ui/button"
 import { X } from "lucide-react"
 import { Card, CardContent } from "../ui/card"
-import { Label } from "../ui/label"
 import { UploadDropzone } from "@/utils/uploadthing"
 import { Field, FieldError, FieldLabel } from "../ui/field"
 
@@ -24,12 +23,7 @@ type Props = {
 }
 
 /* ------------------------ UploadManyImagesDropZone ------------------------ */
-export function UploadManyImagesDropZone({
-	dbImages,
-	label = "images",
-	imagesName = "images",
-	errors,
-}: Props) {
+export function UploadManyImagesDropZone({ dbImages, label = "images", imagesName = "images", errors }: Props) {
 	const [images, setImages] = useState<string[]>(dbImages || [])
 	const handleDeleteManyImages = (index: number) => {
 		setImages(images.filter((_, i) => i !== index))
@@ -67,7 +61,7 @@ export function UploadManyImagesDropZone({
 					) : (
 						<UploadDropzone
 							config={{ cn: twMerge }}
-							className="ut-button:bg-foreground ut-button:text-background ut-button:px-8 ut-button:py-4 ut-ready:p-12 ut-readying:p-12 ut-uploading:p-12 ut-label:text-foreground ut-upload-icon:size-12 ut-upload-icon:text-foreground "
+							className="ut-button:bg-primary ut-button:cursor-pointer ut-button:text-primary-foreground ut-button:px-8 ut-button:py-4 ut-ready:p-12 ut-readying:p-12 ut-uploading:p-12 ut-label:text-foreground ut-upload-icon:size-12 ut-upload-icon:text-foreground "
 							endpoint={"manyImagesUploader"}
 							onClientUploadComplete={(res: any) => {
 								setImages(res.map((r: any) => r.ufsUrl))
@@ -86,13 +80,7 @@ export function UploadManyImagesDropZone({
 }
 
 /* ------------------------- UploadOneImagesDropZone ------------------------ */
-export function UploadOneImagesDropZone({
-	dbImage,
-	label = "image",
-	imageName = "image",
-	imageKey,
-	errors,
-}: Props) {
+export function UploadOneImagesDropZone({ dbImage, label = "image", imageName = "image", imageKey, errors }: Props) {
 	const [image, setImage] = useState<string>(dbImage || "")
 	const handleDeleteOneImages = () => {
 		setImage("")
@@ -128,7 +116,7 @@ export function UploadOneImagesDropZone({
 					) : (
 						<UploadDropzone
 							config={{ cn: twMerge }}
-							className="ut-button:bg-foreground ut-button:text-background ut-button:px-8 ut-button:py-4 ut-ready:p-12 ut-readying:p-12 ut-uploading:p-12 ut-label:text-foreground ut-upload-icon:size-12 ut-upload-icon:text-foreground "
+							className="ut-button:bg-primary ut-button:text-primary-foreground ut-button:cursor-pointer ut-button:px-8 ut-button:py-4 ut-ready:p-12 ut-readying:p-12 ut-uploading:p-12 ut-label:text-foreground ut-upload-icon:size-12 ut-upload-icon:text-foreground "
 							endpoint={"oneImageUploader"}
 							onClientUploadComplete={(res: any) => {
 								setImage(res[0].ufsUrl)

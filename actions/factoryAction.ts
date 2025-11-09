@@ -39,7 +39,7 @@ export const addFactoryAction = async (prevState: unknown, formData: FormData) =
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/factory")
+  redirect("/server/factories")
 }
 
 /* ---------------------------- editFactoryAction --------------------------- */
@@ -68,11 +68,11 @@ export const editFactoryAction = async (prevState: unknown, formData: FormData) 
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/factory")
+  redirect("/server/factories")
 }
 
 /* ------------------------------ deleteFactory ----------------------------- */
-export const deleteFactory = async (formData: FormData) => {
+export const deleteFactoryAction = async (formData: FormData) => {
   const id = formData.get("id")
   try {
     await prisma.factory.delete({
@@ -83,5 +83,5 @@ export const deleteFactory = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/factory")
+  redirect("/server/factories")
 }

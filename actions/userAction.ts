@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma"
 import UserSchema from "@/schemas/UserSchema"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
-
+// TODO ADD isAdmin for add and delete
 /* ------------------------------ addUserAction ----------------------------- */
 export const addUserAction = async (prevState: unknown, formData: FormData) => {
   const submission = parseWithZod(formData, {
@@ -16,7 +16,7 @@ export const addUserAction = async (prevState: unknown, formData: FormData) => {
   try {
     await prisma.user.upsert({
       where: {
-        email: submission.value.email,
+        email: submission.value.email!,
       },
       update: {
         name: submission.value.name,
@@ -41,11 +41,11 @@ export const addUserAction = async (prevState: unknown, formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/user")
+  redirect("/server/users")
 }
 
 
-
+/* ----------------------------- editUserAction ----------------------------- */
 export const editUserAction = async (prevState: unknown, formData: FormData) => {
   const submission = parseWithZod(formData, {
     schema: UserSchema,
@@ -72,10 +72,10 @@ export const editUserAction = async (prevState: unknown, formData: FormData) => 
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/user")
+  redirect("/server/users")
 }
 
-
+/* ------------------------------- deleteUser ------------------------------- */
 export const deleteUser = async (formData: FormData) => {
   const id = formData.get("id")
   try {
@@ -87,5 +87,5 @@ export const deleteUser = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/user")
+  redirect("/server/users")
 }

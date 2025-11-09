@@ -1,18 +1,12 @@
-import { z } from 'zod';
-
-/////////////////////////////////////////
-// MODEL SCHEMA
-/////////////////////////////////////////
+import { z } from 'zod'
 
 export const ModelSchema = z.object({
-  id: z.string(),
+  id: z.string().nullish(),
   title: z.string(),
   factoryId: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-  productId: z.string(),
+  styleId: z.string(),
 })
 
 export type Model = z.infer<typeof ModelSchema>
 
-export default ModelSchema;
+export default ModelSchema

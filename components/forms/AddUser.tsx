@@ -11,14 +11,7 @@ import { Input } from "../ui/input"
 import SubmitButton from "../shared/SubmitButton"
 import CountryInput from "../shared/CountryInput"
 import Phone from "../shared/Phone"
-
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import RoleSchema from "@/generated/inputTypeSchemas/RoleSchema"
 import { UploadOneImagesDropZone } from "../shared/UploadImagesDropZone"
 
@@ -78,11 +71,7 @@ export default function AddUser() {
 			{/* ---------------------------------- role ---------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.role.name}>{fields.role.name}</FieldLabel>
-				<Select
-					key={fields.role.key}
-					name={fields.role.name}
-					defaultValue={fields.role.initialValue}
-				>
+				<Select key={fields.role.key} name={fields.role.name} defaultValue={fields.role.initialValue}>
 					<SelectTrigger>
 						<SelectValue placeholder="Role" />
 					</SelectTrigger>

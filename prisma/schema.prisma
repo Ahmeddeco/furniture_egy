@@ -45,27 +45,6 @@ enum Role {
   user
 }
 
-model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String?         @unique
-  emailVerified DateTime?
-  image         String?
-  mobile        String?
-  country       String?
-  state         String?
-  city          String?
-  accounts      Account[]
-  sessions      Session[]
-  Authenticator Authenticator[]
-  role          Role            @default(user)
-  Review        Review[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  Product       Product?        @relation(fields: [productId], references: [id])
-  productId     String?
-}
-
 model Account {
   userId            String
   type              String
@@ -118,76 +97,156 @@ model Authenticator {
   @@id([userId, credentialID])
 }
 
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String?         @unique
+  emailVerified DateTime?
+  image         String?
+  mobile        String?
+  country       String?
+  state         String?
+  city          String?
+  accounts      Account[]
+  sessions      Session[]
+  Authenticator Authenticator[]
+  role          Role            @default(user)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  factories     Factory[]
+  products      Product[]
+  Review        Review[]
+  orders        Order[]
+  sellerLedgers SellerLedger[]
+}
+
+model Factory {
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  phone         String?        @unique
+  country       String?
+  state         String?
+  city          String?
+  logo          String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  owner         User?          @relation(fields: [ownerId], references: [id])
+  ownerId       String?
+  models        Model[]
+  products      Product[]
+  ledgerEntries SellerLedger[]
+}
+
 model Model {
   id        String    @id @default(uuid())
   title     String
   factory   Factory   @relation(fields: [factoryId], references: [id])
   factoryId String
+  products  Product[]
+  style     Style     @relation(fields: [styleId], references: [id])
+  styleId   String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  product   Product[]
-  productId String
 }
 
-model Factory {
-  id        String    @id @default(uuid())
-  name      String
-  email     String    @unique
-  phone     String?   @unique
-  country   String?
-  state     String?
-  city      String?
-  logo      String?
-  model     Model[]
-  product   Product[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+model Style {
+  id          String    @id @default(uuid())
+  title       String    @unique
+  description String?
+  product     Product[]
+  model       Model[]
 }
 
 model Product {
-  id          String   @id @default(uuid())
+  id          String      @id @default(uuid())
   title       String
-  price       Int      @default(0)
-  quantity    Int      @default(0)
-  size        Size     @default(lg)
+  price       Float       @default(0)
+  discount    Float       @default(0)
+  quantity    Int         @default(0)
   mainImage   String
   images      String[]
   description String
-  category    Category @default(modern)
-  color       Color[]
   review      Review[]
-  factory     Factory  @relation(fields: [factoryId], references: [id])
-  model       Model    @relation(fields: [modelId], references: [id])
+  model       Model       @relation(fields: [modelId], references: [id])
+  factory     Factory     @relation(fields: [factoryId], references: [id])
   factoryId   String
+  style       Style[]
+  seller      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   modelId     String
-  seller      User[]
+  orderItems  OrderItem[]
 
-  @@index([title, category, id])
-}
-
-enum Size {
-  lg
-  xl
-  xs
-}
-
-enum Category {
-  modern
-  classic
-  industerial
-}
-
-model Color {
-  id      String    @id @default(uuid())
-  title   String    @unique
-  product Product[]
+  @@index([title])
 }
 
 model Review {
-  id        String  @id @default(uuid())
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  review    String
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId String
+  review    String
+  rating    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id        String      @id @default(uuid())
+  createdAt DateTime    @default(now())
+  status    OrderStatus @default(pending)
+  total     Int
+  user      User        @relation(fields: [userId], references: [id])
+  items     OrderItem[]
+  userId    String
+}
+
+model OrderItem {
+  id       String  @id @default(uuid())
+  quantity Int
+  price    Int
+  order    Order   @relation(fields: [orderId], references: [id])
+  product  Product @relation(fields: [productId], references: [id])
+
+  orderId     String
+  productId   String
+  ledgerEntry SellerLedger?
+}
+
+enum OrderStatus {
+  pending
+  paid
+  shipped
+  completed
+  cancelled
+}
+
+enum PaymentMethod {
+  credit
+  paypal
+  cash
+}
+
+enum PaymentStatus {
+  pending
+  success
+  failed
+}
+
+// This model tracks every transaction owed to a seller
+model SellerLedger {
+  id          String        @id @default(uuid())
+  amount      Int
+  status      PaymentStatus @default(pending)
+  method      PaymentMethod
+  seller      User          @relation(fields: [sellerId], references: [id])
+  sellerId    String
+  orderItem   OrderItem     @relation(fields: [orderItemId], references: [id])
+  orderItemId String        @unique
+  factory     Factory?      @relation(fields: [factoryId], references: [id])
+  factoryId   String?
+  createdAt   DateTime      @default(now())
 }

@@ -5,6 +5,7 @@ import PhoneInput from "react-phone-number-input"
 import { useState } from "react"
 import { Input } from "../ui/input"
 import { Field, FieldError, FieldLabel } from "../ui/field"
+import { DropdownMenu, DropdownMenuTrigger } from "../ui/dropdown-menu"
 
 type Props = {
 	key: string | undefined
@@ -14,23 +15,20 @@ type Props = {
 }
 
 export default function Phone({ defaultValue, key, name, errors }: Props) {
-	const [value, setValue] = useState<string | undefined>(defaultValue??"")
+	const [value, setValue] = useState<string | undefined>(defaultValue ?? "")
 
 	return (
 		<>
 			<Field>
 				<FieldLabel htmlFor={name}>{name}</FieldLabel>
-				<Input
-					type="hidden"
-					key={key}
-					name={name}
-					value={value}
-				/>
+				<Input type="hidden" key={key} name={name} value={value} />
 				<PhoneInput
-					placeholder="Enter phone number"
+					placeholder="phone number"
 					value={value}
 					onChange={setValue}
-					defaultCountry="EG" 
+					defaultCountry="EG"
+					inputComponent={Input}
+					focusInputOnCountrySelection
 				/>
 				<FieldError>{errors}</FieldError>
 			</Field>

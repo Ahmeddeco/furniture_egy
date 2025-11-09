@@ -6,6 +6,7 @@ import "react-country-state-city/dist/react-country-state-city.css"
 import { Input } from "../ui/input"
 import { City, Country, State } from "@/types/address"
 import { Field, FieldLabel } from "../ui/field"
+import { Button } from "../ui/button"
 
 type CountryProps = {
 	userCountry?: string
@@ -39,7 +40,7 @@ export default function CountryInput({
 			<Field>
 				<FieldLabel htmlFor={labelCountry}>{labelCountry}</FieldLabel>
 				<CountrySelect
-					inputClassName="bg-background text-foreground"
+					inputClassName={` bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md`}
 					onChange={(_country) => {
 						setCountry(_country)
 					}}
@@ -52,7 +53,7 @@ export default function CountryInput({
 			<Field>
 				<FieldLabel htmlFor={labelState}>{labelState}</FieldLabel>
 				<StateSelect
-					inputClassName="bg-background text-foreground"
+					inputClassName="bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md"
 					countryid={country?.id}
 					containerClassName="form-group"
 					onChange={(_state) => setState(_state)}
@@ -65,7 +66,7 @@ export default function CountryInput({
 			<Field>
 				<FieldLabel htmlFor={labelCity}>{labelCity}</FieldLabel>
 				<CitySelect
-					inputClassName="bg-background text-foreground"
+					inputClassName="bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md"
 					countryid={country?.id}
 					stateid={state?.id}
 					onChange={(_city) => setCity(_city)}

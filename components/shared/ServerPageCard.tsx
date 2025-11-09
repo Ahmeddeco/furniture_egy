@@ -1,19 +1,12 @@
 import { Button } from "@/components/ui/button"
-import {
-	Card,
-	CardAction,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { LucideIcon } from "lucide-react"
 import Link from "next/link"
 import React, { ReactElement } from "react"
 
 type Props = {
-	icon: LucideIcon 
+	icon: LucideIcon
 	children?: React.ReactNode
 	title: string
 	description: string
@@ -21,16 +14,9 @@ type Props = {
 	href: string
 }
 
-export default function ServerPageCard({
-	icon,
-	children,
-	title,
-	description,
-	btnTitle,
-	href,
-}: Props) {
+export default function ServerPageCard({ icon, children, title, description, btnTitle, href }: Props) {
 	return (
-		<Card className="min-h-[85vh]">
+		<Card className="min-h-[90vh]">
 			<CardHeader>
 				<CardTitle>{title}</CardTitle>
 				<CardDescription>{description}</CardDescription>

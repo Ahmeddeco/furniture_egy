@@ -15,6 +15,7 @@ export const FactorySchema = z.object({
   logo: z.string().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
+  ownerId: z.string().nullish(),
 })
 
 export type Factory = z.infer<typeof FactorySchema>

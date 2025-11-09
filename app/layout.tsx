@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme/theme-provider"
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
 import { extractRouterConfig } from "uploadthing/server"
 import { ourFileRouter } from "@/app/api/uploadthing/core"
@@ -28,12 +26,7 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${arimo.className}  antialiased`}>
 				<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					{children}
 					<Toaster
 						theme="system"

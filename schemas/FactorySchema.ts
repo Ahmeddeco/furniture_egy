@@ -1,6 +1,5 @@
 import { z } from 'zod'
 
-
 export const FactorySchema = z.object({
   id: z.string().nullish(),
   name: z.string(),
@@ -10,6 +9,7 @@ export const FactorySchema = z.object({
   state: z.string().nullish(),
   city: z.string().nullish(),
   logo: z.string().nullish(),
+  ownerId: z.string().nullish(),
 })
 
 export type Factory = z.infer<typeof FactorySchema>

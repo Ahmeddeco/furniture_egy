@@ -2,7 +2,7 @@ import { auth } from "@/auth"
 import RoleSchema from "@/generated/inputTypeSchemas/RoleSchema"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
-
+// TODO ADD SUPPER_ADMIN ALSO
 export const isAdmin = async () => {
   const session = await auth()
   const authEmail = session?.user?.email
