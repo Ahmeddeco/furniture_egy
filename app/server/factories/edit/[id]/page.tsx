@@ -17,7 +17,7 @@ export default async function EditUserPage({ params }: { params: Promise<{ id: s
 			href="/server/factories"
 		>
 			{!factory?.data ? (
-				<EmptyCard href={"/server/factories"} linkTitle={"no factories found"} linkIcon={Factory} />
+				<EmptyCard href={"/server/factories"} linkTitle={"no factory found"} linkIcon={Factory} />
 			) : (
 				<EditFactory data={factory.data} />
 			)}

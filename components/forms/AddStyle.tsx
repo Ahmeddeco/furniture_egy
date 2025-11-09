@@ -22,13 +22,7 @@ export default function AddStyle() {
 		shouldRevalidate: "onInput",
 	})
 	return (
-		<Form
-			id={form.id}
-			action={action}
-			onSubmit={form.onSubmit}
-			// noValidate
-			className="space-y-6"
-		>
+		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
 			{/* ---------------------------------- name ---------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.title.name}>{fields.title.name}</FieldLabel>

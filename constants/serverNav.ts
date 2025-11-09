@@ -1,10 +1,15 @@
-import { Armchair, ClipboardList, Eye, Factory, Server, Shapes, SwatchBook, User2 } from "lucide-react"
+import { Armchair, ChartColumnIncreasing, ClipboardList, Eye, Factory, Server, Shapes, SwatchBook, User2 } from "lucide-react"
 
 export const serverNav = [
   {
     title: "server",
     href: "/server",
     icon: Server
+  },
+  {
+    title: "information",
+    href: "/information",
+    icon: ChartColumnIncreasing 
   },
   {
     title: "Users",

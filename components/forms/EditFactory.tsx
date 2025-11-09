@@ -29,13 +29,7 @@ export default function EditFactory(data: data) {
 		shouldRevalidate: "onInput",
 	})
 	return (
-		<Form
-			id={form.id}
-			action={action}
-			onSubmit={form.onSubmit}
-			// noValidate
-			className="space-y-6"
-		>
+		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
 			<Input type="hidden" name="id" value={data.data.id} />
 
 			{/* ---------------------------------- name ---------------------------------- */}

@@ -44,10 +44,10 @@ export default async function StylePage({ searchParams }: { searchParams: Promis
 	return (
 		<ServerPageCard
 			icon={PlusCircle}
-			title={"all factories"}
-			description={"All factories in the database."}
-			btnTitle={"add factory"}
-			href={"/server/factory/add"}
+			title={"all styles"}
+			description={"All styles in the database."}
+			btnTitle={"add style"}
+			href={"/server/styles/add"}
 		>
 			{!styles?.data.length ? (
 				<EmptyCard href={"/server/styles/add"} linkTitle={"add style"} linkIcon={SwatchBook} />

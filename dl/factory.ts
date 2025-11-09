@@ -9,7 +9,8 @@ export const getAllFactory = async (size: number, page: number) => {
       skip: (page * size) - size,
       take: size,
       orderBy: {
-        createdAt: "desc",
+        // createdAt: "desc",
+        name: "asc",
       },
     })
     return { data, totalPages }
@@ -24,7 +25,7 @@ export const getOneFactory = async (id: string) => {
     const data = await prisma.factory.findUnique({
       where: {
         id: id,
-      },
+      }
     })
     return { data }
   } catch (error) {

@@ -140,7 +140,7 @@ model Factory {
 
 model Model {
   id        String    @id @default(uuid())
-  title     String
+  title     String    @unique
   factory   Factory   @relation(fields: [factoryId], references: [id])
   factoryId String
   products  Product[]

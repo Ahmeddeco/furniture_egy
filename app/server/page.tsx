@@ -1,13 +1,13 @@
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import { isAdmin } from "@/functions/isAdmin"
-import { PlusCircle, Server } from "lucide-react"
+import { CircleArrowLeft, PlusCircle, Server } from "lucide-react"
 
 export default async function ServerPage() {
 	await isAdmin()
 
 	return (
 		<ServerPageCard
-			icon={Server}
+			icon={CircleArrowLeft}
 			title={"ServerPage"}
 			description={"Server Page."}
 			btnTitle={"add Server"}

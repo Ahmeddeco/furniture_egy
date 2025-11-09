@@ -1,25 +1,35 @@
-import { CircleChevronLeft, Factory } from "lucide-react"
+import { CircleChevronLeft, Shapes } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
-import { getOneFactory } from "@/dl/factory"
-import EditFactory from "@/components/forms/EditFactory"
+import {
+	AllFactoriesForModel,
+	AllStylesForModel,
+	getAllFactoriesForModel,
+	getAllStylesForModel,
+	getOneModel,OneModel
+} from "@/dl/model"
+import EditModel from "@/components/forms/EditModel"
 
 export default async function EditUserPage({ params }: { params: Promise<{ id: string }> }) {
 	const id = (await params).id
-	const factory = await getOneFactory(id)
+	const model:OneModel = await getOneModel(id)
+	
+	const factories: AllFactoriesForModel = await getAllFactoriesForModel()
+	const styles: AllStylesForModel = await getAllStylesForModel()
+	
 
 	return (
 		<ServerPageCard
 			icon={CircleChevronLeft}
-			title={"edit factory"}
-			description={"edit a factory to the database."}
+			title={"edit model"}
+			description={"edit a model to the database."}
 			btnTitle={"back"}
-			href="/server/factory"
+			href="/server/models"
 		>
-			{!factory?.data ? (
-				<EmptyCard href={"/server/factory"} linkTitle={"no factory found"} linkIcon={Factory} />
+			{!model ? (
+				<EmptyCard href={"/server/models"} linkTitle={"no model found"} linkIcon={Shapes} />
 			) : (
-				<EditFactory data={factory.data} />
+				<EditModel data={model} factories={factories} styles={styles} />
 			)}
 		</ServerPageCard>
 	)
