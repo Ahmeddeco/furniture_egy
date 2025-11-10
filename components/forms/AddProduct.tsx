@@ -26,9 +26,15 @@ type Props = {
 				name: string | null
 		  }[]
 		| undefined
+	styles:
+		| {
+				id: string
+				title: string
+		  }[]
+		| undefined
 }
 
-export default function AddProduct({ factories, users }: Props) {
+export default function AddProduct({ factories, users, styles }: Props) {
 	const [lastResult, action] = useActionState(addProductAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
@@ -101,6 +107,24 @@ export default function AddProduct({ factories, users }: Props) {
 					placeholder="162"
 				/>
 				<FieldError>{fields.quantity.errors}</FieldError>
+			</Field>
+
+			{/* -------------------------------- style -------------------------------- */}
+			<Field>
+				<FieldLabel htmlFor={fields.styleId.name}>style</FieldLabel>
+				<Select key={fields.styleId.key} name={fields.styleId.name} defaultValue={fields.styleId.initialValue}>
+					<SelectTrigger>
+						<SelectValue placeholder="Kanaba" />
+					</SelectTrigger>
+					<SelectContent>
+						{styles?.map(({ id, title }) => (
+							<SelectItem value={id} key={id}>
+								{title}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select>
+				<FieldError>{fields.styleId.errors}</FieldError>
 			</Field>
 
 			{/* --------------------------------- factory -------------------------------- */}

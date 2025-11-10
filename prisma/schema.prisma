@@ -156,12 +156,13 @@ model Product {
   review      Review[]
   factory     Factory     @relation(fields: [factoryId], references: [id])
   factoryId   String
-  style       Style[]
+  style       Style       @relation(fields: [styleId], references: [id])
   seller      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]
+  styleId     String
 
   @@index([title])
 }

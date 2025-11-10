@@ -17,6 +17,7 @@ export const ProductSchema = z.object({
   userId: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
+  styleId: z.string(),
 })
 
 export type Product = z.infer<typeof ProductSchema>

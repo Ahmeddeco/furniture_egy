@@ -23,7 +23,6 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
         quantity: submission.value.quantity,
         factoryId: submission.value.factoryId,
         userId: submission.value.userId,
-        modelId: submission.value.modelId,
         mainImage: submission.value.mainImage,
         images: submission.value.images
       }
@@ -55,7 +54,6 @@ export const editProductAction = async (prevState: unknown, formData: FormData) 
         quantity: submission.value.quantity,
         factoryId: submission.value.factoryId,
         userId: submission.value.userId,
-        modelId: submission.value.modelId,
         mainImage: submission.value.mainImage,
         images: submission.value.images
       }

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma"
 
+/* ------------------------------ getAllStyles ------------------------------ */
 export const getAllStyles = async (size: number, page: number) => {
   try {
     const totalUsers = await prisma.style.count()
@@ -17,7 +18,7 @@ export const getAllStyles = async (size: number, page: number) => {
   }
 }
 
-
+/* ------------------------------- getOneStyle ------------------------------ */
 export const getOneStyle = async (id: string) => {
   try {
     const data = await prisma.style.findUnique({
@@ -26,6 +27,16 @@ export const getOneStyle = async (id: string) => {
       },
     })
     return { data }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+/* ------------------------- getAllStylesForDropdown ------------------------ */
+export const getAllStylesForDropdown = async () => {
+  try {
+    const data = await prisma.style.findMany({ orderBy: { title: "asc" }, select: { id: true, title: true } })
+    return data
   } catch (error) {
     console.error(error)
   }
