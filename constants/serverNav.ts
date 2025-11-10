@@ -8,7 +8,7 @@ export const serverNav = [
   },
   {
     title: "information",
-    href: "/information",
+    href: "/server/information",
     icon: ChartColumnIncreasing
   },
   {

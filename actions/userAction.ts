@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma"
 import UserSchema from "@/schemas/UserSchema"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
-// TODO ADD isAdmin for add and delete
 /* ------------------------------ addUserAction ----------------------------- */
 export const addUserAction = async (prevState: unknown, formData: FormData) => {
   const submission = parseWithZod(formData, {

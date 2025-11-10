@@ -10,5 +10,9 @@ export const frontNavLinks = [
   {
     title: "contact",
     href: "/contact"
-  }
+  },
+  {
+    title: "server",
+    href: "/server",
+  },
 ]

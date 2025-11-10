@@ -39,8 +39,6 @@ export default async function StylePage({ searchParams }: { searchParams: Promis
 	const pageSize = +size || 10
 	const styles = await getAllStyles(pageSize, pageNumber)
 
-	console.log("styles from StylePage", styles)
-
 	return (
 		<ServerPageCard
 			icon={PlusCircle}

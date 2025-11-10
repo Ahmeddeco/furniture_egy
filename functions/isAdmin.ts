@@ -2,7 +2,7 @@ import { auth } from "@/auth"
 import RoleSchema from "@/generated/inputTypeSchemas/RoleSchema"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
-// TODO ADD SUPPER_ADMIN ALSO
+
 export const isAdmin = async () => {
   const session = await auth()
   const authEmail = session?.user?.email
@@ -10,7 +10,7 @@ export const isAdmin = async () => {
     redirect("/")
   } else {
     const authRole = await prisma.user.findUnique({ where: { email: authEmail! }, select: { role: true } })
-    if (authRole?.role === RoleSchema.enum.admin) {
+    if (authRole?.role === RoleSchema.enum.admin || authEmail === process.env.SUPPER_ADMIN) {
       return true
     } else {
       redirect("/")

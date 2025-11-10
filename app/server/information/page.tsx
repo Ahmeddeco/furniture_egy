@@ -1,3 +1,6 @@
-export default function InformationPage() {
-  return <h1>Welcome to Informationpage!</h1>;
+import { isSeller } from "@/functions/isSeller"
+// TODO Only display the information of the current seller
+export default async function InformationPage() {
+  await isSeller()
+  return <h1>Welcome to Information page!</h1>;
 }

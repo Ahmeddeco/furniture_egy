@@ -52,6 +52,7 @@
 		"typescript": "^5"
 	},
 	"name": "funiture",
+	
 	"private": true,
 	"scripts": {
 		"build": "next build",

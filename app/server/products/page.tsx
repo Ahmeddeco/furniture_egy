@@ -28,7 +28,7 @@ import Form from "next/form"
 import { Input } from "@/components/ui/input"
 import { getAllProductForProductPage } from "@/dl/productData"
 import { deleteProductAction } from "@/actions/productAction"
-
+// TODO Display only products that are owned by the current user
 export default async function ProductPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
 	await isAdmin()
 
