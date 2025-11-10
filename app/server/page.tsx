@@ -1,6 +1,6 @@
-import { isAdmin } from "@/functions/isAdmin"
+import { isSeller } from "@/functions/isSeller"
 
 export default async function ServerPage() {
-	await isAdmin()
+	await isSeller()
 	return <h1>ServerPage</h1>
 }

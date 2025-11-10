@@ -26,12 +26,6 @@ type Props = {
 				name: string | null
 		  }[]
 		| undefined
-	models:
-		| {
-				id: string | null
-				title: string | null
-		  }[]
-		| undefined
 	data:
 		| ({
 				model: {
@@ -65,7 +59,7 @@ type Props = {
 		| undefined
 }
 
-export default function EditProduct({ factories, models, users, data }: Props) {
+export default function EditProduct({ factories, users, data }: Props) {
 	const [lastResult, action] = useActionState(editProductAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
@@ -75,8 +69,6 @@ export default function EditProduct({ factories, models, users, data }: Props) {
 		shouldValidate: "onBlur",
 		shouldRevalidate: "onInput",
 	})
-
-	console.log("product from EditProductPage", data)
 
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
@@ -175,24 +167,6 @@ export default function EditProduct({ factories, models, users, data }: Props) {
 					</SelectContent>
 				</Select>
 				<FieldError>{fields.userId.errors}</FieldError>
-			</Field>
-
-			{/* -------------------------------- model -------------------------------- */}
-			<Field>
-				<FieldLabel htmlFor={fields.modelId.name}>model</FieldLabel>
-				<Select key={fields.modelId.key} name={fields.modelId.name} defaultValue={data?.modelId}>
-					<SelectTrigger>
-						<SelectValue placeholder="Istanboly" />
-					</SelectTrigger>
-					<SelectContent>
-						{models?.map(({ id, title }) => (
-							<SelectItem value={id!} key={id}>
-								{title}
-							</SelectItem>
-						))}
-					</SelectContent>
-				</Select>
-				<FieldError>{fields.modelId.errors}</FieldError>
 			</Field>
 
 			{/* ------------------------------- mainImage ------------------------------ */}

@@ -26,15 +26,9 @@ type Props = {
 				name: string | null
 		  }[]
 		| undefined
-	models:
-		| {
-				id: string | null
-				title: string | null
-		  }[]
-		| undefined
 }
 
-export default function AddProduct({ factories, users, models }: Props) {
+export default function AddProduct({ factories, users }: Props) {
 	const [lastResult, action] = useActionState(addProductAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
@@ -143,24 +137,6 @@ export default function AddProduct({ factories, users, models }: Props) {
 					</SelectContent>
 				</Select>
 				<FieldError>{fields.userId.errors}</FieldError>
-			</Field>
-
-			{/* -------------------------------- model -------------------------------- */}
-			<Field>
-				<FieldLabel htmlFor={fields.modelId.name}>model</FieldLabel>
-				<Select key={fields.modelId.key} name={fields.modelId.name} defaultValue={fields.modelId.initialValue}>
-					<SelectTrigger>
-						<SelectValue placeholder="Istanboly" />
-					</SelectTrigger>
-					<SelectContent>
-						{models?.map(({ id, title }) => (
-							<SelectItem value={id!} key={id}>
-								{title}
-							</SelectItem>
-						))}
-					</SelectContent>
-				</Select>
-				<FieldError>{fields.modelId.errors}</FieldError>
 			</Field>
 
 			{/* ------------------------------- mainImage ------------------------------ */}

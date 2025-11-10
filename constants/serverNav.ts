@@ -1,4 +1,4 @@
-import { Armchair, ChartColumnIncreasing, ClipboardList, Eye, Factory, PcCase, Shapes, SwatchBook, User2 } from "lucide-react"
+import { Armchair, ChartColumnIncreasing, ClipboardList, Eye, Factory, PcCase, SwatchBook, User2 } from "lucide-react"
 
 export const serverNav = [
   {
@@ -25,11 +25,6 @@ export const serverNav = [
     title: "styles",
     href: "/server/styles",
     icon: SwatchBook
-  },
-  {
-    title: "models",
-    href: "/server/models",
-    icon: Shapes
   },
   {
     title: "Products",

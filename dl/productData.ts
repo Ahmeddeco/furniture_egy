@@ -1,10 +1,20 @@
+import { isSeller } from "@/functions/isSeller"
+import RoleSchema from "@/generated/inputTypeSchemas/RoleSchema"
 import { prisma } from "@/lib/prisma"
 
-export const getAllProductForProductPage = async (size: number, page: number) => {
+/* ----------------------- getAllProductForProductPage ---------------------- */
+export const getAllProductForProductPage = async (size: number, page: number,) => {
   try {
     const totalProducts = await prisma.product.count()
     const totalPages = Math.ceil(totalProducts / size)
+
+    const authUser = await isSeller()
+    const sellerId = authUser.authRole?.role === RoleSchema.enum.seller ? authUser.session.user?.id : undefined
+
     const data = await prisma.product.findMany({
+      where: {
+        userId: sellerId
+      },
       select: {
         id: true,
         title: true,
@@ -16,12 +26,6 @@ export const getAllProductForProductPage = async (size: number, page: number) =>
           select: {
             id: true,
             name: true
-          }
-        },
-        model: {
-          select: {
-            id: true,
-            title: true
           }
         },
         seller: {
@@ -41,6 +45,7 @@ export const getAllProductForProductPage = async (size: number, page: number) =>
   }
 }
 
+/* ------------------------------ getOneProduct ----------------------------- */
 export const getOneProduct = async (id: string) => {
   try {
     const data = await prisma.product.findUnique({

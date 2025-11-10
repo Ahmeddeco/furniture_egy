@@ -133,21 +133,8 @@ model Factory {
   updatedAt     DateTime       @updatedAt
   owner         User?          @relation(fields: [ownerId], references: [id])
   ownerId       String?
-  models        Model[]
   products      Product[]
   ledgerEntries SellerLedger[]
-}
-
-model Model {
-  id        String    @id @default(uuid())
-  title     String    @unique
-  factory   Factory   @relation(fields: [factoryId], references: [id])
-  factoryId String
-  products  Product[]
-  style     Style     @relation(fields: [styleId], references: [id])
-  styleId   String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
 }
 
 model Style {
@@ -155,7 +142,6 @@ model Style {
   title       String    @unique
   description String?
   product     Product[]
-  model       Model[]
 }
 
 model Product {
@@ -168,7 +154,6 @@ model Product {
   images      String[]
   description String
   review      Review[]
-  model       Model       @relation(fields: [modelId], references: [id])
   factory     Factory     @relation(fields: [factoryId], references: [id])
   factoryId   String
   style       Style[]
@@ -176,7 +161,6 @@ model Product {
   userId      String
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-  modelId     String
   orderItems  OrderItem[]
 
   @@index([title])

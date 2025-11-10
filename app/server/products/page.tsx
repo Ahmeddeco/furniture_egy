@@ -1,4 +1,3 @@
-import { isAdmin } from "@/functions/isAdmin"
 import { Armchair, MoreVertical, PlusCircle } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
@@ -28,9 +27,10 @@ import Form from "next/form"
 import { Input } from "@/components/ui/input"
 import { getAllProductForProductPage } from "@/dl/productData"
 import { deleteProductAction } from "@/actions/productAction"
-// TODO Display only products that are owned by the current user
+import { isSeller } from "@/functions/isSeller"
+import RoleSchema from "@/generated/inputTypeSchemas/RoleSchema"
 export default async function ProductPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
-	await isAdmin()
+	await isSeller()
 
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
@@ -57,7 +57,6 @@ export default async function ProductPage({ searchParams }: { searchParams: Prom
 							<TableHead>price</TableHead>
 							<TableHead>discount</TableHead>
 							<TableHead>quantity</TableHead>
-							<TableHead>model</TableHead>
 							<TableHead>seller</TableHead>
 							<TableHead>factory</TableHead>
 							<TableHead className="text-right">settings</TableHead>
@@ -65,12 +64,12 @@ export default async function ProductPage({ searchParams }: { searchParams: Prom
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{products.data.map(({ discount, factory, id, mainImage, model, price, quantity, seller, title }) => (
+						{products.data.map(({ discount, factory, id, mainImage,  price, quantity, seller, title }) => (
 							<TableRow key={id}>
 								<TableCell>
 									<Image
 										src={mainImage ?? "/icons/noImage.svg"}
-										alt={""}
+										alt={title ?? "noImage"}
 										width={50}
 										height={50}
 										className="rounded-lg object-cover aspect-square"
@@ -80,7 +79,6 @@ export default async function ProductPage({ searchParams }: { searchParams: Prom
 								<TableCell>{price}</TableCell>
 								<TableCell>{discount}</TableCell>
 								<TableCell>{quantity}</TableCell>
-								<TableCell className="capitalize">{model.title}</TableCell>
 								<TableCell className="capitalize">{seller.name}</TableCell>
 								<TableCell className="capitalize">{factory.name}</TableCell>
 								{/* -------------------------------- settings -------------------------------- */}

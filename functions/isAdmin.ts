@@ -11,7 +11,7 @@ export const isAdmin = async () => {
   } else {
     const authRole = await prisma.user.findUnique({ where: { email: authEmail! }, select: { role: true } })
     if (authRole?.role === RoleSchema.enum.admin || authEmail === process.env.SUPPER_ADMIN) {
-      return true
+      return { authRole, session }
     } else {
       redirect("/")
     }
