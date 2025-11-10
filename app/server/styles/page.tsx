@@ -1,5 +1,5 @@
 import { isAdmin } from "@/functions/isAdmin"
-import { Factory, MoreVertical, PhoneOff, PlusCircle, SwatchBook } from "lucide-react"
+import {  MoreVertical,  PlusCircle, SwatchBook } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -12,7 +12,6 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import {
@@ -26,8 +25,6 @@ import {
 } from "@/components/ui/dialog"
 import Form from "next/form"
 import { Input } from "@/components/ui/input"
-import { getAllFactory } from "@/dl/factoryData"
-import { deleteFactoryAction } from "@/actions/factoryAction"
 import { getAllStyles } from "@/dl/styleData"
 import { deleteStyleAction } from "@/actions/styleAction"
 

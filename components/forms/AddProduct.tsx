@@ -12,6 +12,7 @@ import { addProductAction } from "@/actions/productAction"
 import ProductSchema from "@/schemas/ProductSchema"
 import { Textarea } from "../ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import CategorySchema from "@/generated/inputTypeSchemas/CategorySchema"
 
 type Props = {
 	factories:
@@ -68,6 +69,24 @@ export default function AddProduct({ factories, users, styles }: Props) {
 					defaultValue={fields.description.initialValue}
 				/>
 				<FieldError>{fields.description.errors}</FieldError>
+			</Field>
+
+			{/* -------------------------------- category -------------------------------- */}
+			<Field>
+				<FieldLabel htmlFor={fields.category.name}>category</FieldLabel>
+				<Select key={fields.category.key} name={fields.category.name} defaultValue={fields.category.initialValue}>
+					<SelectTrigger>
+						<SelectValue placeholder={CategorySchema.Enum.living} />
+					</SelectTrigger>
+					<SelectContent>
+						{Object.values(CategorySchema.Enum).map((category, index) => (
+							<SelectItem value={category} key={index}>
+								{category}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select>
+				<FieldError>{fields.category.errors}</FieldError>
 			</Field>
 
 			{/* ---------------------------------- price --------------------------------- */}

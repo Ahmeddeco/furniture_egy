@@ -12,6 +12,8 @@ import { editProductAction } from "@/actions/productAction"
 import ProductSchema from "@/schemas/ProductSchema"
 import { Textarea } from "../ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import CategorySchema from "@/generated/inputTypeSchemas/CategorySchema"
+import { $Enums } from "@prisma/client"
 
 type Props = {
 	factories:
@@ -26,40 +28,43 @@ type Props = {
 				name: string | null
 		  }[]
 		| undefined
+	styles:
+		| {
+				id: string
+				title: string
+		  }[]
+		| undefined
 	data:
 		| ({
-				model: {
-					id: string
-					title: string
-				}
 				seller: {
-					id: string
 					name: string | null
+					id: string
 				}
 				factory: {
-					id: string
 					name: string
+					id: string
 				}
 		  } & {
-				id: string
+				userId: string
 				createdAt: Date
 				updatedAt: Date
+				id: string
 				title: string
-				description: string
+				category: $Enums.Category
 				price: number
 				discount: number
 				quantity: number
-				factoryId: string
-				userId: string
-				modelId: string
 				mainImage: string
 				images: string[]
+				description: string
+				factoryId: string
+				styleId: string
 		  })
 		| null
 		| undefined
 }
 
-export default function EditProduct({ factories, users, data }: Props) {
+export default function EditProduct({ factories, users, styles, data }: Props) {
 	const [lastResult, action] = useActionState(editProductAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
@@ -92,6 +97,24 @@ export default function EditProduct({ factories, users, data }: Props) {
 				<FieldLabel htmlFor={fields.description.name}>{fields.description.name}</FieldLabel>
 				<Textarea key={fields.description.key} name={fields.description.name} defaultValue={data?.description ?? ""} />
 				<FieldError>{fields.description.errors}</FieldError>
+			</Field>
+
+			{/* -------------------------------- category -------------------------------- */}
+			<Field>
+				<FieldLabel htmlFor={fields.category.name}>category</FieldLabel>
+				<Select key={fields.category.key} name={fields.category.name} defaultValue={data?.category}>
+					<SelectTrigger>
+						<SelectValue placeholder={CategorySchema.Enum.living} />
+					</SelectTrigger>
+					<SelectContent>
+						{Object.values(CategorySchema.Enum).map((category, index) => (
+							<SelectItem value={category} key={index}>
+								{category}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select>
+				<FieldError>{fields.category.errors}</FieldError>
 			</Field>
 
 			{/* ---------------------------------- price --------------------------------- */}
@@ -131,6 +154,24 @@ export default function EditProduct({ factories, users, data }: Props) {
 					placeholder="162"
 				/>
 				<FieldError>{fields.quantity.errors}</FieldError>
+			</Field>
+
+			{/* -------------------------------- style -------------------------------- */}
+			<Field>
+				<FieldLabel htmlFor={fields.styleId.name}>style</FieldLabel>
+				<Select key={fields.styleId.key} name={fields.styleId.name} defaultValue={data?.styleId }>
+					<SelectTrigger>
+						<SelectValue placeholder="Kanaba" />
+					</SelectTrigger>
+					<SelectContent>
+						{styles?.map(({ id, title }) => (
+							<SelectItem value={id} key={id}>
+								{title}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select>
+				<FieldError>{fields.styleId.errors}</FieldError>
 			</Field>
 
 			{/* --------------------------------- factory -------------------------------- */}

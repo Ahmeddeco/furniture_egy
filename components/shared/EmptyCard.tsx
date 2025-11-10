@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/empty"
 import { Button } from "../ui/button"
 import { LucideIcon, Trash2 } from "lucide-react"
-import { FcEmptyBattery } from "react-icons/fc"
 import Link from "next/link"
 import React from "react"
 

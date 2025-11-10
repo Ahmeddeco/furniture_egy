@@ -18,9 +18,11 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
       data: {
         title: submission.value.title,
         description: submission.value.description,
+        category: submission.value.category,
         price: submission.value.price,
         discount: submission.value.discount,
         quantity: submission.value.quantity,
+        styleId: submission.value.styleId,
         factoryId: submission.value.factoryId,
         userId: submission.value.userId,
         mainImage: submission.value.mainImage,
@@ -49,9 +51,11 @@ export const editProductAction = async (prevState: unknown, formData: FormData) 
       data: {
         title: submission.value.title,
         description: submission.value.description,
+        category: submission.value.category,
         price: submission.value.price,
         discount: submission.value.discount,
         quantity: submission.value.quantity,
+        styleId: submission.value.styleId,
         factoryId: submission.value.factoryId,
         userId: submission.value.userId,
         mainImage: submission.value.mainImage,

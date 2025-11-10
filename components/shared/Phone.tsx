@@ -5,7 +5,6 @@ import PhoneInput from "react-phone-number-input"
 import { useState } from "react"
 import { Input } from "../ui/input"
 import { Field, FieldError, FieldLabel } from "../ui/field"
-import { DropdownMenu, DropdownMenuTrigger } from "../ui/dropdown-menu"
 
 type Props = {
 	key: string | undefined

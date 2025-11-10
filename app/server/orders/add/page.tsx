@@ -1,4 +1,4 @@
-import { CircleArrowLeft, CircleChevronLeft, Factory } from "lucide-react"
+import {  CircleChevronLeft,  } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import AddFactory from "@/components/forms/AddFactory"
 

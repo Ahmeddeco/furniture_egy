@@ -1,10 +1,12 @@
 import { z } from 'zod';
+import { CategorySchema } from '../inputTypeSchemas/CategorySchema'
 
 /////////////////////////////////////////
 // PRODUCT SCHEMA
 /////////////////////////////////////////
 
 export const ProductSchema = z.object({
+  category: CategorySchema,
   id: z.string(),
   title: z.string(),
   price: z.number(),

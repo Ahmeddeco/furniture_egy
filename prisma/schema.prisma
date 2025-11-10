@@ -144,9 +144,18 @@ model Style {
   product     Product[]
 }
 
+enum Category {
+  living
+  dining
+  bedroom
+  kids
+  kitchen
+}
+
 model Product {
   id          String      @id @default(uuid())
   title       String      @unique
+  category    Category
   price       Float       @default(0)
   discount    Float       @default(0)
   quantity    Int         @default(0)

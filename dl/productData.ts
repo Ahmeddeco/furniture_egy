@@ -19,21 +19,13 @@ export const getAllProductForProductPage = async (size: number, page: number,) =
         id: true,
         title: true,
         price: true,
+        category: true,
         discount: true,
         quantity: true,
         mainImage: true,
-        factory: {
-          select: {
-            id: true,
-            name: true
-          }
-        },
-        seller: {
-          select: {
-            id: true,
-            name: true
-          }
-        }
+        style: { select: { title: true } },
+        factory: { select: { name: true } },
+        seller: { select: { name: true } }
       },
       orderBy: { createdAt: "desc" },
       take: size,
@@ -56,12 +48,6 @@ export const getOneProduct = async (id: string) => {
           select: {
             id: true,
             name: true
-          }
-        },
-        model: {
-          select: {
-            id: true,
-            title: true
           }
         },
         seller: {

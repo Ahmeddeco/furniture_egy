@@ -3,7 +3,7 @@ import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle }
 import { Separator } from "@/components/ui/separator"
 import { CircleChevronLeft, LucideIcon } from "lucide-react"
 import Link from "next/link"
-import React, { ReactElement } from "react"
+import React from "react"
 
 type Props = {
 	icon?: LucideIcon

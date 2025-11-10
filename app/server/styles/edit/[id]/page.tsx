@@ -1,8 +1,6 @@
 import { CircleChevronLeft, Factory } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
-import { getOneFactory } from "@/dl/factoryData"
-import EditFactory from "@/components/forms/EditFactory"
 import EditStyle from "@/components/forms/EditStyle"
 import { getOneStyle } from "@/dl/styleData"
 
