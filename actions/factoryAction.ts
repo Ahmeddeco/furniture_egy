@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from "@/lib/prisma"
+import prisma from "@/lib/prisma"
 import FactorySchema from "@/schemas/FactorySchema"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"

@@ -1,6 +1,6 @@
 import { auth } from "@/auth"
 import RoleSchema from "@/generated/inputTypeSchemas/RoleSchema"
-import { prisma } from "@/lib/prisma"
+import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
 
 export const isSeller = async () => {

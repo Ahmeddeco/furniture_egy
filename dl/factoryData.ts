@@ -1,10 +1,10 @@
-import { prisma } from "@/lib/prisma"
+import prisma from "@/lib/prisma"
 
 /* ------------------------------ getAllFactory ----------------------------- */
 export const getAllFactory = async (size: number, page: number) => {
   try {
-    const totalUsers = await prisma.user.count()
-    const totalPages = Math.ceil(totalUsers / size)
+    const totalFactories = await prisma.factory.count()
+    const totalPages = Math.ceil(totalFactories / size)
     const data = await prisma.factory.findMany({
       skip: (page * size) - size,
       take: size,

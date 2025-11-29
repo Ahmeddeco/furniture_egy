@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from "@/lib/prisma"
+import prisma from "@/lib/prisma"
 import StyleSchema from "@/schemas/StyleSchema"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
@@ -16,14 +16,14 @@ export const addStyleAction = async (prevState: unknown, formData: FormData) => 
   try {
     await prisma.style.upsert({
       where: {
-       title: submission.value.title
+        title: submission.value.title
       },
       update: {
         description: submission.value.description
       },
       create: {
-       title: submission.value.title,
-       description: submission.value.description
+        title: submission.value.title,
+        description: submission.value.description
       },
     })
   } catch (error) {
@@ -46,8 +46,8 @@ export const editStyleAction = async (prevState: unknown, formData: FormData) =>
         id: submission.value.id!
       },
       data: {
-         title: submission.value.title,
-       description: submission.value.description
+        title: submission.value.title,
+        description: submission.value.description
       }
     })
   } catch (error) {

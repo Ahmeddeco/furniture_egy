@@ -1,10 +1,10 @@
-import { prisma } from "@/lib/prisma"
+import prisma from "@/lib/prisma"
 
 /* ------------------------------ getAllStyles ------------------------------ */
 export const getAllStyles = async (size: number, page: number) => {
   try {
-    const totalUsers = await prisma.style.count()
-    const totalPages = Math.ceil(totalUsers / size)
+    const totalStyles = await prisma.style.count()
+    const totalPages = Math.ceil(totalStyles / size)
     const data = await prisma.style.findMany({
       skip: (page * size) - size,
       take: size,

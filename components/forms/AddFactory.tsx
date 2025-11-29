@@ -48,7 +48,7 @@ export default function AddFactory() {
 					defaultValue={fields.email.initialValue}
 					placeholder="something@email.com"
 				/>
-				<FieldError>{fields.name.errors}</FieldError>
+				<FieldError>{fields.email.errors}</FieldError>
 			</Field>
 
 			{/* --------------------------------- phone --------------------------------- */}

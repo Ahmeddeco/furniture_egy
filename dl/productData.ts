@@ -1,6 +1,6 @@
 import { isSeller } from "@/functions/isSeller"
 import RoleSchema from "@/generated/inputTypeSchemas/RoleSchema"
-import { prisma } from "@/lib/prisma"
+import prisma from "@/lib/prisma"
 
 /* ----------------------- getAllProductForProductPage ---------------------- */
 export const getAllProductForProductPage = async (size: number, page: number,) => {
@@ -59,6 +59,30 @@ export const getOneProduct = async (id: string) => {
       }
     })
     return { data }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getLatestProduct = async () => {
+  try {
+    const data = await prisma.product.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 10,
+      select: {
+        id: true,
+        title: true,
+        price: true,
+        category: true,
+        discount: true,
+        quantity: true,
+        mainImage: true,
+        style: { select: { title: true } },
+        factory: { select: { name: true } },
+        seller: { select: { name: true } }
+      }
+    })
+    return data
   } catch (error) {
     console.error(error)
   }

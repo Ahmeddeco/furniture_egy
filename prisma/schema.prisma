@@ -30,13 +30,12 @@ generator zod {
 }
 
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "rhel-openssl-3.0.x"] //It tells Prisma to get the engine for the new Vercel/AWS Lambda runtime.
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 enum Role {
@@ -118,6 +117,8 @@ model User {
   Review        Review[]
   orders        Order[]
   sellerLedgers SellerLedger[]
+  likes         Like[]
+  favorites     Favorite[]
 }
 
 model Factory {
@@ -148,19 +149,47 @@ enum Category {
   living
   dining
   bedroom
-  kids
-  kitchen
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+model Color {
+  id        String    @id @default(uuid())
+  title     String    @unique
+  colorCode String    @unique
+  products  Product[]
 }
 
 model Product {
   id          String      @id @default(uuid())
   title       String      @unique
   category    Category
-  price       Float       @default(0)
-  discount    Float       @default(0)
+  price       Int         @default(0)
+  discount    Int         @default(0)
   quantity    Int         @default(0)
   mainImage   String
   images      String[]
+  color       Color[]
   description String
   review      Review[]
   factory     Factory     @relation(fields: [factoryId], references: [id])
@@ -172,6 +201,8 @@ model Product {
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]
   styleId     String
+  likes       Like[]
+  favorites   Favorite[]
 
   @@index([title])
 }

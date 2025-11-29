@@ -145,6 +145,9 @@ export default function AddProduct({ factories, users, styles }: Props) {
 				</Select>
 				<FieldError>{fields.styleId.errors}</FieldError>
 			</Field>
+			
+			
+		
 
 			{/* --------------------------------- factory -------------------------------- */}
 			<Field>
